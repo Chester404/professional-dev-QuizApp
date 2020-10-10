@@ -8,19 +8,19 @@ let questionCounter = 0;
 let availableQuestions = [];
 
 let questions = [
-    {   question: " Inside whic HTML element do we put teh JavaScript ??",
+    {   question: " Inside which HTML element do we put the JavaScript ??",
         choice1: "<script>",
         choice2: "<javaScript>",
         choice3: "<js>",
         choice4: "<Scripting>",
-        answer: 1
+        answer: 2
     },
     {   question: "What is the syntax for referring to an external script called 'xxx.js' ??",
         choice1: "<script href='xxx.js'>",
         choice2: "<script name='xxx.js'>",
         choice3: "<script src='xxx.js'>",
         choice4: "<script file='xxx.js'>",
-        answer: 3
+        answer: 1
     },
     {   question: "How do you write 'Hello World' in an alert box ??",
         choice1: "msgBox('Hello Wolrd');",
@@ -40,7 +40,7 @@ startGame = () =>{
     questionCounter = 0;
     score = 0;
     availableQuestions = [...questions];
-    console.log(availableQuestions);
+    // console.log(availableQuestions);
     getNewQuestion();
 };
 
@@ -73,8 +73,18 @@ choices.forEach(choice => {
             acceptingAnswers =false;
             const selectedChoice = e.target;
             const selectedAnswer = selectedChoice.dataset["number"];
-            console.log(selectedAnswer);
-            getNewQuestion();      
+
+            const classToApply = selectedAnswer  == currentQuestion.answer ? "correct" : "incorrect";
+            
+            selectedChoice.parentElement.classList.add(classToApply);
+            
+            setTimeout(()=>{
+                
+                selectedChoice.parentElement.classList.remove(classToApply);
+                getNewQuestion();
+
+            }, 1000);
+                  
     });
 });
 
